@@ -22,20 +22,6 @@ This repository now includes a working React + TypeScript + Tailwind dashboard s
    npm run build && npm run preview
    ```
 
-## Deploying to Netlify
-1. Connect this repository to Netlify and keep the root as the repo root (Netlify will read `netlify.toml`).
-2. The provided `netlify.toml` already sets the correct build context for the `dashboard/` app:
-   - Base directory: `dashboard`
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-   - SPA rewrite: all routes redirect to `index.html` so client-side routing works on refresh.
-   - Node version: 18 (override in Netlify UI if needed).
-3. Alternatively, with the Netlify CLI installed and authenticated, run from the repo root:
-   ```bash
-   netlify deploy --build
-   ```
-   This honors the same build/publish settings and will create a draft deploy; add `--prod` for production.
-
 ## Replacing the sample data
 - Swap out `src/data/sampleData.ts` with the real Farmer/Enterprise/Youth datasets exported using the AGRA dictionary column names (e.g., DB7, D4, B14_Q).
 - The dashboard already binds chart labels and table headers to the official AGRA variable labels and expects the following key fields:
