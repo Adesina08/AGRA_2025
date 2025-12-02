@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #0a1729;
+}
+
+.card {
+  @apply rounded-xl bg-navy-800 border border-navy-700 shadow-lg p-4 transition duration-200 hover:shadow-xl;
+}
+
+.section-title {
+  @apply text-lg font-semibold text-gray-100 mb-2;
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}

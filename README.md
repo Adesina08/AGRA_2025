@@ -1,14 +1,34 @@
-# AGRA 2025 QC Dashboard Prompt Package
+# AGRA 2025 QC Dashboard
 
-This repository stores the longform prompt you can reuse when building or refining the AGRA 2025 QC dashboard with ChatGPT. It captures all guidance for using the `AGRA_2025.xlsx` data dictionary, the expected tabs (Farmer, Enterprise, Youth), and the UI/tech-stack requirements.
+This repository now includes a working React + TypeScript + Tailwind dashboard scaffold for the AGRA 2025 QC program alongside the reusable prompt captured in [`prompts/AGRA_2025_super_prompt.md`](prompts/AGRA_2025_super_prompt.md).
 
-## How to use
-1. Start a fresh ChatGPT conversation.
-2. Upload the **same** `AGRA_2025.xlsx` file that contains the three sheets (`AGRA FARMER`, `AGRA ENTERPRISE`, `AGRA YOUTH`).
-3. Copy the entire contents of [`prompts/AGRA_2025_super_prompt.md`](prompts/AGRA_2025_super_prompt.md) into the chat.
-4. Ask ChatGPT to design or refine the dashboard using that prompt (e.g., to generate React + TypeScript + Tailwind code with Recharts and Leaflet as described).
+## Contents
+- `dashboard/` — Vite + React + TypeScript app implementing the 3-tab QC dashboard (Farmer, Enterprise, Youth) with KPI cards, charts, maps, and data tables wired to the AGRA variable codes.
+- `prompts/AGRA_2025_super_prompt.md` — the longform prompt ready to copy into a ChatGPT session together with the `AGRA_2025.xlsx` data dictionary.
 
-## Files
-- `prompts/AGRA_2025_super_prompt.md` — the full “super-charged” prompt ready for copy/paste.
+## Running the dashboard locally
+1. Install dependencies (requires Node 18+):
+   ```bash
+   cd dashboard
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+   The site listens on the default Vite port (5173). A Leaflet stylesheet is pulled via CDN until the real assets are bundled.
+3. Build for production:
+   ```bash
+   npm run build && npm run preview
+   ```
 
-Feel free to add a shorter prompt or sample data structures in new files if you need more concise or implementation-ready snippets.
+## Replacing the sample data
+- Swap out `src/data/sampleData.ts` with the real Farmer/Enterprise/Youth datasets exported using the AGRA dictionary column names (e.g., DB7, D4, B14_Q).
+- The dashboard already binds chart labels and table headers to the official AGRA variable labels and expects the following key fields:
+  - Farmer: DB5/DB6 (age/age category), DB7 or D10 (gender), DB10/DB11/DB14 (location)
+  - Enterprise: B2/B3 (owner ages), A10/B1 (gender), B14_Q (district), validation status
+  - Youth: D4 (sex), D9 (location type), D8 latitude/longitude, RS* engagement markers
+- Auto-refresh is simulated every 45 seconds to demonstrate real-time KPI updates; adjust or connect to your pipeline as needed.
+
+## Using the super prompt
+If you want to regenerate or extend the UI via ChatGPT, start a new conversation, upload `AGRA_2025.xlsx`, and paste the full text from `prompts/AGRA_2025_super_prompt.md`. The prompt already lists the three sheets and their variable codes so the generated UI stays aligned with the data dictionary.
